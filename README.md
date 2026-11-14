@@ -1,124 +1,176 @@
-# Nazorat — o'zini cheklash ilovasi (Honor, Android 8–16 / MagicOS)
+# Nazorat — shaxsiy o'zini cheklash ilovasi
 
-O'z telefoningizdagi ilovalar vaqtini kuzatadi, limitdan oshsa Telegramga
-xabar beradi va ilovalarni **faqat Telegram orqali** qulflaydi/ochadi.
-Telefonning o'zida ochish tugmasi yo'q — zaif daqiqada o'zingiz ocholmaysiz.
+**Honor · Android 16 / MagicOS uchun**
 
-> Dvigatel **Accessibility (Maxsus imkoniyatlar)** xizmati sifatida ishlaydi.
-> Shuning uchun **doimiy bildirishnoma yo'q** va foreground-service cheklovlari
-> (Android 14+) ta'sir qilmaydi. Ilova faqat *Sozlamalar → Maxsus
-> imkoniyatlar* ro'yxatida ko'rinadi.
+O'z telefoningizdagi ilovalar (Instagram, Roblox va h.k.) vaqtini kuzatadi,
+limitdan oshsa Telegramga xabar beradi va ilovalarni **faqat Telegram bot
+orqali** qulflaydi/ochadi. Telefonda ochish tugmasi yo'q — zaif daqiqada
+o'zingiz ocholmaysiz, faqat botdan ochasiz.
 
----
-
-## 1. Telegram bot yaratish
-
-1. Telegramda **@BotFather** ni oching → `/newbot` → nom va username bering.
-2. Beradigan **token**ni nusxalang (masalan `123456789:AAF...`).
-3. Botni keyinroq (sozlashdan so'ng) ochib `/start` yuborasiz — birinchi yozgan
-   akkaunt **admin** bo'lib qoladi, boshqa hech kim boshqara olmaydi.
+- Bot token va Telegram ID **kodga joylangan** — ilovani ochib sozlash shart emas.
+- **Bosh ekran/menyuda ikonka YO'Q** (launcher kategoriyasi olib tashlangan).
+- Dvigatel **Accessibility (Maxsus imkoniyatlar)** xizmati — doimiy
+  bildirishnoma yo'q, Android 14+ foreground-service cheklovlari ta'sir qilmaydi.
+- Faqat **sizning Telegram ID'ingiz** (8581234999) botni boshqaradi.
 
 ---
 
-## 2. APK yig'ish (Android Studio)
+## 1. Ilova telefonda qanday ko'rinadi?
 
-1. Kompyuterga **Android Studio** o'rnating (bepul, Windows/Mac/Linux).
-2. `File → Open` → shu `SelfControl` papkasini tanlang.
-3. Gradle "sync" tugashini kuting (internet kerak — kutubxonalarni yuklaydi).
-4. `Build → Build Bundle(s) / APK(s) → Build APK(s)`.
-5. Tayyor fayl: `app/build/outputs/apk/debug/app-debug.apk`
-6. Shu `.apk` ni telefonga o'tkazing (Telegram/kabel/USB) va oching.
+- **Bosh ekranda / ilovalar menyusida** — umuman yo'q (ikonka yo'q).
+- Faqat **Sozlamalar → Ilovalar** va **Sozlamalar → Maxsus imkoniyatlar**
+  ro'yxatlarida **"Tizim xizmati"** nomi bilan turadi (oddiy tishli ikon).
+- Doimiy bildirishnoma yo'q.
 
----
-
-## 3. O'rnatish va ruxsatlar (qadamma-qadam — tartib muhim!)
-
-1. APK ni o'rnating (telefon "Noma'lum manbalar"ga ruxsat so'rasa — bering).
-2. **"Nazorat"** ilovasini oching, **bot tokenini** kiriting → **Saqlash**.
-3. Ruxsatlarni tugmalar orqali bering:
-   - **① Usage access** → ro'yxatdan "Nazorat"ni yoqing (vaqt hisobi uchun).
-   - **② Accessibility (Maxsus imkoniyatlar)** — eng muhimi:
-     - **Android 13+ / MagicOS:** avval ilova sahifasida (App info) o'ng
-       yuqoridagi **⋮** → **"Cheklangan sozlamalarga ruxsat"** (Allow
-       restricted settings) ni bosing. Aks holda tizim Accessibility'ni
-       yoqishga ruxsat bermaydi.
-     - So'ng: Maxsus imkoniyatlar → **Nazorat** → yoqing.
-   - **③ Ustidan chizish (overlay)** → yoqing.
-   - **④ Batareya cheklovini olib tashlash** → ruxsat bering.
-4. **MagicOS/EMUI batareya** (bu qilmasangiz tizim xizmatni o'ldiradi):
-   - Sozlamalar → **Batareya → Ilovalarni ishga tushirish** (App launch) →
-     **Nazorat** → **Qo'lda boshqarish** → "Avtomatik ishga tushirish",
-     "Bilvosita", "Fonda ishlash" — hammasini **yoqing**.
-5. Botga **`/start`** yuboring → tugmali menyu chiqadi, siz admin bo'lasiz.
-6. (Ixtiyoriy) **"Ikonkani yashirish"** tugmasini bosing yoki `/hide`.
-
-> Diqqat: avval Accessibility'ni yoqib, keyin `/start` yuboring. `/start` dan
-> keyin "qo'riqchi" yoqiladi va ilova sahifasini himoya qila boshlaydi.
+> Shuning uchun quyidagi sozlashlar ilovani ochmasdan, to'g'ridan-to'g'ri
+> **Sozlamalar** orqali qilinadi. Ilovani "Tizim xizmati" nomi bilan qidiring.
 
 ---
 
-## 4. Bot menyusi (tugmalar)
+## 2. O'rnatish
 
-Botga `/start` → menyu:
+1. `Nazorat.apk` (yoki `app-debug.apk`) ni telefonga o'tkazing.
+2. O'rnatishda "Noma'lum manbalardan o'rnatish"ga ruxsat bering.
+3. O'rnatgach, ilovada **"Open/Ochish" tugmasi bo'lmaydi** — bu normal
+   (ikonka yo'q). To'g'ridan Sozlamalarga o'tasiz (3-bo'lim).
 
-- **📊 Bugun** — eng ko'p ishlatilgan ilovalar + qurilma jami vaqti
-- **📅 7 kunlik** — har kun bo'yicha vaqt va eng ko'p ilova
-- **📱 Ilovalar** → ilovani bosing → uning **bugun/kecha** vaqti + **🔒/🔓** tugma
-- **🔒 Hammasini qulflash** / **🔓 Hammasini ochish**
-- **🛡 Qo'riqchi ON/OFF** — o'chirishdan himoya
-- **👻 Yashirish** — ikonkani yashirish
+> Eski versiya ustiga o'rnatsangiz — yangilanadi, sozlamalar saqlanadi.
 
-🟢 = ochiq, 🔒 = qulflangan. (Telegram botlarida tugma rangini o'zgartirib
-bo'lmaydi — holat emoji bilan ko'rsatiladi.)
+---
 
-**Faqat siz boshqarasiz:** birinchi `/start` yuborgan akkaunt admin. Boshqa
-hamma (bot username'ini topib olsa ham) e'tiborsiz qoldiriladi.
+## 3. Ruxsatlarni berish (eng muhim qism — tartib bilan)
 
-**Internet:** yoqsangiz avtomatik ulanadi, o'chirsangiz jim to'xtaydi
-(xatosiz), qayta yoqsangiz o'zi davom etadi.
+Hammasini **Sozlamalar**dan qilasiz. Ilovani "Tizim xizmati" deb qidiring.
 
-**Telefon yonganda:** "📱 Telefon yoqildi" xabari keladi.
+### 3.1. Cheklangan sozlamalarga ruxsat (Android 13+ / MagicOS)
+Sideload qilingan ilovaga Accessibility berishdan oldin shart:
+- **Sozlamalar → Ilovalar → Tizim xizmati**
+- O'ng yuqori **⋮ (uch nuqta) → "Cheklangan sozlamalarga ruxsat berish"**
+  (Allow restricted settings)
+
+### 3.2. Accessibility — Maxsus imkoniyatlar (DVIGATEL)
+- **Sozlamalar → Maxsus imkoniyatlar (Accessibility)**
+- (MagicOS'da ba'zan: **Sozlamalar → Qulayliklar → Maxsus imkoniyatlar**)
+- **"Tizim xizmati"** ni toping → **yoqing** → chiqqan oynada "Ruxsat berish".
+
+Bu yoqilishi bilan dvigatel ishga tushadi va bot ulanadi.
+
+### 3.3. Usage access (foydalanish statistikasi)
+- **Sozlamalar → Ilovalar → Maxsus ruxsatlar → Foydalanishga kirish
+  (Usage access)**
+- **"Tizim xizmati"** → yoqing.
+
+### 3.4. Ustidan chizish (overlay)
+- **Sozlamalar → Ilovalar → Maxsus ruxsatlar → Boshqa ilovalar ustidan
+  chizish** → **"Tizim xizmati"** → yoqing.
+
+### 3.5. Batareyada o'lib qolmasligi uchun (MagicOS — SHART)
+- **Sozlamalar → Batareya → Ilovalarni ishga tushirish** (App launch)
+- **"Tizim xizmati"** → **Qo'lda boshqarish** → "Avtomatik ishga tushirish",
+  "Bilvosita ishga tushirish", "Fonda ishlash" — **hammasini yoqing**.
+
+---
+
+## 4. Ishga tushirish
+
+Ruxsatlar berilgach, Telegram botingizni oching va **`/start`** yuboring.
+Token kodda bo'lgani uchun bot darrov javob beradi va tugmali menyu chiqadi.
+Faqat sizning ID'ingiz (8581234999) boshqaradi — boshqa hech kim emas.
+
+---
+
+## 5. Telegram menyu (tugmalar)
+
+`/start` → menyu:
+
+| Tugma | Vazifasi |
+|---|---|
+| 📊 **Bugun** | Bugungi eng ko'p ishlatilgan ilovalar + qurilma jami vaqti |
+| 📅 **7 kunlik** | Oxirgi 7 kun bo'yicha kunlik vaqt va eng ko'p ilova |
+| 📱 **Ilovalar** | Ilovani bosing → uning **bugun/kecha** vaqti + **🔒/🔓** tugma |
+| 🔒 **Hammasini qulflash** | Barcha kuzatilgan ilovani qulflash |
+| 🔓 **Hammasini ochish** | Hammasini ochish |
+| 🛡 **Qo'riqchi ON/OFF** | O'chirishdan himoyani yoqish/o'chirish |
+
+🟢 = ochiq, 🔒 = qulflangan.
+
+### Avtomatik
+- Biror ilova **kunlik limitidan oshsa** — avtomatik qulflanadi va Telegramga
+  ⛔ xabar keladi.
+- Har kuni **23:59** da kunlik hisobot keladi, hisob nollanadi.
+- **Telefon yonganda** "📱 Telefon yoqildi" xabari keladi.
+- Qulflangan ilova ochilsa — **~1 soniyada** bosh ekranga chiqarib yuboradi.
 
 ### Matnli buyruqlar (menyuga qo'shimcha)
-`/stats`, `/lock [ilova]`, `/unlock [ilova]`, `/limit instagram 60`,
-`/add com.paket 30`, `/remove instagram`, `/reset`, `/hide`, `/show`,
-`/guard on|off`. Nomlar: `instagram`, `roblox` yoki to'liq paket nomi.
+| Buyruq | Vazifasi |
+|---|---|
+| `/stats` | Bugungi statistika |
+| `/lock [ilova]` | Qulflash (bo'sh = hammasi) |
+| `/unlock [ilova]` | Ochish (bo'sh = hammasi) |
+| `/limit instagram 60` | Kunlik limit (daqiqa) |
+| `/add com.paket.nomi 30` | Yangi ilova qo'shish |
+| `/remove instagram` | Kuzatuvdan olib tashlash |
+| `/reset` | Bugungi hisobni nollash |
+| `/guard on` yoki `/guard off` | O'chirishdan himoya |
+
+Qisqa nomlar: `instagram`, `roblox`. Boshqasi uchun to'liq paket nomi
+(masalan `com.whatsapp`). Paket nomini Play Store havolasidagi `id=...` dan
+olasiz.
 
 ---
 
-## 5. O'chirishdan himoya va zaxira eshiklar
+## 6. O'chirishdan himoya (Qo'riqchi) va zaxira eshiklar
 
-Qo'riqchi yoqilgan bo'lsa (standart), ilovaning **App info** sahifasini
-(Force stop / O'chirish joyi) ochsangiz telefon Home'ga chiqib ketadi.
+**Qo'riqchi** (standart yoqilgan): "Tizim xizmati"ning **App info** sahifasini
+(Force stop / O'chirish joyi) ochsangiz — telefon avtomatik bosh ekranga
+chiqib ketadi. Shu sabab zaif daqiqada o'chira olmaysiz.
 
-**O'chirmoqchi bo'lsangiz (qasddan qiyin, lekin mumkin):**
-1. Noutbukdan Telegramga **`/guard off`** → himoya o'chadi → o'chirasiz. *(asosiy)*
-2. Yoki Sozlamalar → **Maxsus imkoniyatlar** → "Nazorat"ni o'chiring (qo'riqchi
-   bu sahifada ishlamaydi) → so'ng o'chiring.
-3. Yoki **Xavfsiz rejim (Safe Mode)** da yoqing — barcha tashqi accessibility
-   xizmatlari o'chadi — va o'chiring.
-
----
-
-## 6. Halol ogohlantirishlar
-
-- **Sozlamalar → Ilovalar / Maxsus imkoniyatlar** ro'yxatidan root'siz
-  butunlay yashirib bo'lmaydi. Ikonka va "recent"dan yashiramiz; App info
-  sahifasini "qo'riqchi" himoya qiladi.
-- Eng yangi **MagicOS**da ikonkani yashirish har doim ham ishlamasligi mumkin
-  (tizim cheklovi) — bu holda `/hide` ta'sir qilmaydi, qolgani ishlaydi.
-- **Telegram buyruqlari** telefon chuqur uyquda (ekran o'chiq, ishlatilmayotgan)
-  bo'lsa biroz kechikishi mumkin — telefon uyg'onganda yetib boradi. Qulflash
-  esa ekran yoniq paytda (kerak bo'lganda) ishlaydi.
-- **"Telefon o'chmoqda"** xabari ishonchli emas (o'chish juda tez). "Yoqildi"
-  ishlaydi.
-- **Haqiqiy "o'chmaydigan"** nazorat faqat **root** yoki kompyuterdan **ADB
-  (device owner)** bilan bo'ladi — xohlasangiz alohida ko'rsataman.
-- Kod **telefonda sinalmagan** — Android Studio'da yig'ganda xato chiqsa,
-  matnini menga yuboring, tuzataman.
+**Chindan o'chirmoqchi bo'lsangiz (qasddan qiyin, lekin mumkin):**
+1. Botga **`/guard off`** → himoya o'chadi → Sozlamalardan o'chirasiz. *(asosiy)*
+2. Yoki **Maxsus imkoniyatlar** → "Tizim xizmati"ni o'chiring (qo'riqchi bu
+   sahifada ishlamaydi) → so'ng o'chirasiz.
+3. Yoki telefonni **Xavfsiz rejim (Safe Mode)** da yoqib o'chiring.
 
 ---
 
-## Paket nomini topish
-Play Store'da ilova sahifasi URL'idagi `id=...` qismi:
-`.../details?id=com.instagram.android` → `com.instagram.android`.
+## 7. Halol chegaralar (root'siz Android 16)
+
+- ✅ **Bosh ekran/menyudan ikonka butunlay yo'q.**
+- ⚠️ Ilova baribir **Sozlamalar → Ilovalar / Maxsus imkoniyatlar** ro'yxatida
+  "Tizim xizmati" nomi bilan **ko'rinadi** — buni faqat **root** yashiradi.
+  Qo'riqchi App info sahifasini himoya qiladi.
+- ⚠️ **To'liq o'chmaydigan qilish** faqat root yoki kompyuterdan ADB
+  (device-owner) bilan bo'ladi. Honor bootloader'i qulflangani uchun root
+  odatda imkonsiz.
+- ⚠️ Telefon **chuqur uyquda** bo'lsa Telegram buyruqlari biroz kechikishi
+  mumkin (uyg'onganda yetadi). Qulflash ekran yoniq paytda ishlaydi.
+- ⚠️ "Telefon o'chmoqda" xabari ishonchsiz (o'chish juda tez). "Yoqildi" ishlaydi.
+
+---
+
+## 8. Kodni o'zgartirish / qayta yig'ish
+
+Loyiha GitHub'da: `github.com/zerrolvl/nazorat-apk`. APK GitHub Actions'da
+avtomatik yig'iladi.
+
+- Yangi APK: **Actions → Build APK → Run workflow** (telefon brauzeridan ham).
+- Tayyor APK: **Releases → latest → `app-debug.apk`**, yoki `apk-dist`
+  branchidagi `dist/app-debug.apk`.
+- Tokenni o'zgartirmoqchi bo'lsangiz: `app/.../Core.kt` dagi `DEFAULT_TOKEN`
+  va `DEFAULT_ADMIN` ni o'zgartiring (yoki menga ayting).
+
+Kompyuterda yig'ish: Android Studio'da papkani oching → Build → Build APK.
+(Batafsil: `BUILD_ONLINE.md`.)
+
+---
+
+## 9. Texnik tuzilish (qisqacha)
+
+- `AppBlockerService` — Accessibility: vaqt hisobi, qulflash, Telegram poll,
+  qo'riqchi, kunlik alarm, "yoqildi" xabari (bosh dvigatel).
+- `Bot` — Telegram menyu/buyruqlar.
+- `Stats` — statistika (UsageStatsManager: bugun/kecha/7 kun).
+- `Menu` — inline tugmalar.
+- `Core` — holat, saqlash, Telegram API, kodga joylangan token/ID.
+- `Receivers` — yoqilish/o'chish/kunlik hodisalar.
+- Minimal kutubxona, qo'shimcha dependency'siz (faqat AndroidX core/appcompat).

@@ -22,10 +22,7 @@ object Menu {
             listOf(Pair("📊 Bugun", "today"), Pair("📅 7 kunlik", "week")),
             listOf(Pair("📱 Ilovalar", "apps")),
             listOf(Pair("🔒 Hammasini qulflash", "lockall"), Pair("🔓 Hammasini ochish", "unlockall")),
-            listOf(
-                Pair(if (AppState.guard) "🛡 Qo'riqchi: ON" else "🛡 Qo'riqchi: OFF", "guard"),
-                Pair("👻 Yashirish", "hide")
-            )
+            listOf(Pair(if (AppState.guard) "🛡 Qo'riqchi: ON" else "🛡 Qo'riqchi: OFF", "guard"))
         )
         return Pair(text, Telegram.kb(rows))
     }

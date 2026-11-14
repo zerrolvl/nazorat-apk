@@ -80,10 +80,6 @@ object Bot {
                 val (t, m) = Menu.main(); Telegram.edit(messageId, t, m)
                 Telegram.answer(cbId, if (AppState.guard) "Qo'riqchi yoqildi" else "Qo'riqchi o'chdi")
             }
-            data == "hide" -> {
-                Icon.setHidden(ctx, true)
-                Telegram.answer(cbId, "Ikonka yashirildi 👻")
-            }
             data.startsWith("app:") -> {
                 val pkg = data.substring(4)
                 val (t, m) = Menu.appDetail(ctx, pkg); Telegram.edit(messageId, t, m); Telegram.answer(cbId, null)
@@ -145,8 +141,6 @@ object Bot {
                 }
             }
             "reset" -> { AppState.usageMs.clear(); AppState.limitLocked.clear(); AppState.notified.clear(); Telegram.send("Bugungi hisob nollandi") }
-            "hide" -> { Icon.setHidden(ctx, true); Telegram.send("Ikonka yashirildi 👻  (/show qaytaradi)") }
-            "show" -> { Icon.setHidden(ctx, false); Telegram.send("Ikonka qaytarildi.") }
             "guard" -> {
                 when (parts.getOrNull(1)?.lowercase(Locale.ROOT)) {
                     "on" -> { AppState.guard = true; Telegram.send("Qo'riqchi YOQILDI 🛡") }
