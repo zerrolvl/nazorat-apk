@@ -2,7 +2,11 @@ name: Build APK
 
 on:
   push:
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -25,9 +29,29 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon --stacktrace
 
-      - name: APK ni yuklab olinadigan qilish
+      - name: Artifact (zaxira)
         uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+
+      - name: APK ni apk-dist branchga qo'yish
+        run: |
+          cp app/build/outputs/apk/debug/app-debug.apk /tmp/app-debug.apk
+          git config user.name "ci"
+          git config user.email "ci@users.noreply.github.com"
+          git checkout --orphan apk-dist
+          git rm -rf . > /dev/null 2>&1 || true
+          mkdir -p dist
+          cp /tmp/app-debug.apk dist/app-debug.apk
+          git add -f dist/app-debug.apk
+          git commit -m "APK build output"
+          git push -f origin apk-dist
+
+      - name: Release yaratish
+        run: |
+          gh release delete latest --cleanup-tag --yes 2>/dev/null || true
+          gh release create latest app/build/outputs/apk/debug/app-debug.apk --target main --title "Nazorat APK" --notes "So'nggi build"
+        env:
+          GH_TOKEN: ${{ github.token }}
