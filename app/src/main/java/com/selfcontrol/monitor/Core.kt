@@ -81,11 +81,18 @@ object AppState {
 object Prefs {
     private const val NAME = "selfcontrol"
 
+    // Kodga joylangan standart qiymatlar (ilovani ochmasdan ishlashi uchun)
+    private const val DEFAULT_TOKEN = "9172762038:AAHVPPv3DyMKGX3YDV1wLcI97EiF-v2dz5M"
+    private const val DEFAULT_ADMIN = "8581234999"
+
     fun load(c: Context) {
         val sp = c.getSharedPreferences(NAME, Context.MODE_PRIVATE)
-        AppState.botToken = sp.getString("token", "") ?: ""
-        AppState.chatId = sp.getString("chat", "") ?: ""
-        AppState.adminId = sp.getString("admin", "") ?: ""
+        val tok = sp.getString("token", "") ?: ""
+        AppState.botToken = if (tok.isEmpty()) DEFAULT_TOKEN else tok
+        val ch = sp.getString("chat", "") ?: ""
+        AppState.chatId = if (ch.isEmpty()) DEFAULT_ADMIN else ch
+        val adm = sp.getString("admin", "") ?: ""
+        AppState.adminId = if (adm.isEmpty()) DEFAULT_ADMIN else adm
         AppState.offset = sp.getLong("offset", 0L)
         AppState.dayKey = sp.getString("day", "") ?: ""
         AppState.guard = sp.getBoolean("guard", true)
