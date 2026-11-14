@@ -35,11 +35,11 @@ class AppBlockerService : AccessibilityService() {
                 performGlobalAction(GLOBAL_ACTION_HOME)
             }
             ticks++
-            if (ticks % 5 == 0) {
+            if (ticks % 15 == 0) {
                 val ctx = applicationContext
                 Net.bg { Prefs.save(ctx) }
             }
-            handler.postDelayed(this, 3000)
+            handler.postDelayed(this, 1000)
         }
     }
 
@@ -50,7 +50,7 @@ class AppBlockerService : AccessibilityService() {
         Bot.scheduleDailyAlarm(this)
         Bot.checkDayRollover(this)
         startPolling()
-        handler.postDelayed(tick, 3000)
+        handler.postDelayed(tick, 1000)
     }
 
     private fun startPolling() {
