@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Nazorat</string>
+    <string name="accessibility_desc">Belgilangan ilovalar ochilishini cheklaydi va foydalanish vaqtini hisoblaydi.</string>
+</resources>
